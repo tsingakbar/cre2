@@ -159,28 +159,25 @@ cre2_decl void cre2_strings_to_ranges (const char * text, cre2_range_t * ranges,
 /** --------------------------------------------------------------------
  ** Other matching functions.
  ** ----------------------------------------------------------------- */
+cre2_decl int cre2_full_match (const char * pattern, const cre2_string_t * text,
+             cre2_string_t * match, int nmatch);
+cre2_decl int cre2_partial_match (const char * pattern, const cre2_string_t * text,
+             cre2_string_t * match, int nmatch);
 
-typedef int cre2_match_stringz_fun_t (const char * pattern, const cre2_string_t * text,
-				      cre2_string_t * match, int nmatch);
+cre2_decl int cre2_consume (const char * pattern, cre2_string_t * text,
+              cre2_string_t * match, int nmatch);
+cre2_decl int cre2_find_and_consume (const char * pattern, cre2_string_t * text,
+              cre2_string_t * match, int nmatch);
 
-typedef int cre2_match_stringz2_fun_t (const char * pattern, cre2_string_t * text,
-				       cre2_string_t * match, int nmatch);
+cre2_decl int cre2_full_match_re (cre2_regexp_t * rex, const cre2_string_t * text,
+         cre2_string_t * match, int nmatch);
+cre2_decl int cre2_partial_match_re (cre2_regexp_t * rex, const cre2_string_t * text,
+         cre2_string_t * match, int nmatch);
 
-typedef int cre2_match_rex_fun_t (cre2_regexp_t * rex, const cre2_string_t * text,
-				  cre2_string_t * match, int nmatch);
-
-typedef int cre2_match_rex2_fun_t (cre2_regexp_t * rex, cre2_string_t * text,
-				   cre2_string_t * match, int nmatch);
-
-cre2_decl cre2_match_stringz_fun_t	cre2_full_match;
-cre2_decl cre2_match_stringz_fun_t	cre2_partial_match;
-cre2_decl cre2_match_stringz2_fun_t	cre2_consume;
-cre2_decl cre2_match_stringz2_fun_t	cre2_find_and_consume;
-
-cre2_decl cre2_match_rex_fun_t		cre2_full_match_re;
-cre2_decl cre2_match_rex_fun_t		cre2_partial_match_re;
-cre2_decl cre2_match_rex2_fun_t		cre2_consume_re;
-cre2_decl cre2_match_rex2_fun_t		cre2_find_and_consume_re;
+cre2_decl int cre2_consume_re (cre2_regexp_t * rex, cre2_string_t * text,
+          cre2_string_t * match, int nmatch);
+cre2_decl int cre2_find_and_consume_re (cre2_regexp_t * rex, cre2_string_t * text,
+          cre2_string_t * match, int nmatch);
 
 
 /** --------------------------------------------------------------------

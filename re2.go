@@ -10,7 +10,7 @@ package re2
 // char *next_ptr(char *pos) {
 //   return ++pos;
 // }
-//cre2_decl int cre2_partial_match_re_helper(cre2_regexp_t * rex, const char* textp, int textlen,
+//cre2_decl int cre2_partial_match_re_helper(cre2_regexp_t* rex, const char* textp, int textlen,
 //        cre2_string_t * match, int nmatch) {
 //    const cre2_string_t text = {textp, textlen};
 //    return cre2_partial_match_re(rex, &text, match, nmatch);
@@ -684,8 +684,7 @@ func (re *Regexp) Match(b []byte) bool {
 		length = 0
 	}
 
-	var cre2_match [1]C.cre2_string_t
-	result := C.cre2_partial_match_re_helper(unsafe.Pointer(re.cre2_re_with_bracket), data, length, &cre2_match[0], 1)
+	result := C.cre2_partial_match_re_helper(unsafe.Pointer(re.cre2_re_with_bracket), data, length, nil, 0)
 	return bool(result != 0)
 }
 

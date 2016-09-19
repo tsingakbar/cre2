@@ -346,6 +346,10 @@ DEFINE_MATCH_ZSTRING_FUN2(cre2_find_and_consume,FindAndConsumeN)
 	cre2_string_t * match, int nmatch)				\
   {									\
     re2::StringPiece	input(text->data, text->length);		\
+    if (nmatch == 0) { \
+        /* much more faster to skip those vecotr initalization. */ \
+        return int(RE2::FUN(input, *TO_RE2(rex), NULL, 0)); \
+    } \
     std::vector<re2::StringPiece>	strv(nmatch);			\
     std::vector<RE2::Arg>		argv(nmatch);			\
     std::vector<RE2::Arg*>		args(nmatch);			\
@@ -357,8 +361,8 @@ DEFINE_MATCH_ZSTRING_FUN2(cre2_find_and_consume,FindAndConsumeN)
     retval = RE2::FUN(input, *TO_RE2(rex), args.data(), nmatch);	\
     if (retval) {							\
       for (int i=0; i<nmatch; ++i) {					\
-	match[i].data	= strv[i].data();				\
-	match[i].length = strv[i].length();				\
+	      match[i].data	= strv[i].data();				\
+	      match[i].length = strv[i].length();				\
       }									\
     }									\
     return int(retval);							\
